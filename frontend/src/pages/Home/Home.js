@@ -1,7 +1,34 @@
+import './Home.css'
+
+import picture from '../../assets/Picture/home-page-picture-cropped.jpg' 
+
 const Home = () => {
     return (
         <div className="home">
-            <h2>Home</h2>
+            <div className="home-pic-title-container">
+                <div className="home-picture-container">
+                    <img src={picture} alt="" />
+                </div>
+                <div className="home-title-container">
+                    <h1>Find Your Tutor Here</h1>
+                    <h3>100+ Experienced Tutor Here</h3>
+                    <p>Personalized tutoring that fits your unique learning needs</p>
+                    <p>We connect you with top-tiers tutors</p>
+
+                    <div className="home-title-button-container">
+                        <button>Get Started</button>
+                        <button>Explore</button>
+                    </div>
+                </div>
+            </div> 
+            <div className="home-box-decor-container">
+                <div className="left-green"></div>
+                <div className="left-blue"></div>
+
+                <div className="right-green"></div>
+                <div className="right-yellow"></div>
+                <div className="right-blue"></div>
+            </div>           
         </div>
     )
 }

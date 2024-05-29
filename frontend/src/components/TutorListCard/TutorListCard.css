@@ -1,0 +1,9 @@
+.tutor-list-card {
+    width: 30%;
+    background-color: rgb(255, 151, 151);
+}
+
+.top-part-container {
+    display: flex;
+    justify-content: space-between;
+}
