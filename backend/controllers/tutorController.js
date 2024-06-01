@@ -18,7 +18,9 @@ const createTutor = async (req, res) => {
         firstName,
         lastName,
         email,
-        password
+        password,
+        field,
+        price
     } = req.body
 
     try {
@@ -26,19 +28,25 @@ const createTutor = async (req, res) => {
             tutorFirstName,
             tutorLastName,
             tutorEmail,
-            tutorPassword
+            tutorPassword,
+            tutorField,
+            tutorPrice
         ] = [
             firstName,
             lastName,
             email,
-            password
+            password,
+            field,
+            price
         ]
 
         const tutor = await Tutor.create({
             tutorFirstName,
             tutorLastName,
             tutorEmail,
-            tutorPassword
+            tutorPassword,
+            tutorField,
+            tutorPrice
         })
         res.status(200).json(tutor)
     }
