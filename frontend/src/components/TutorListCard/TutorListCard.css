@@ -1,6 +1,7 @@
 .tutor-list-card {
-    width: 30%;
+    width: 100%;
     background-color: rgb(255, 151, 151);
+    border-radius: 10px;
 }
 
 .top-part-container {

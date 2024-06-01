@@ -18,6 +18,14 @@ const tutorSchema = new Schema({
     tutorPassword: {
         type: String,
         required: true
+    },
+    tutorField: {
+        type:String,
+        required: false
+    },
+    tutorPrice: {
+        type: Number,
+        required: false
     }
 }, { timestamps: true })
 
