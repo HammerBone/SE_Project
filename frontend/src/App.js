@@ -16,6 +16,7 @@ function App() {
             <Route path="/tutor" element={<Tutor />}/>
             {/* <Route path="/About" element={<About />}/> */}
             <Route path='/register' element={<Register />}/>
+            
           </Routes>
         </div>
       </BrowserRouter>
