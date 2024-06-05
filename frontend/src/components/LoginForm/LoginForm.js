@@ -14,7 +14,7 @@ const LoginForm = () => {
         
         const login = {username, password}
         
-        const url = '/api/tutor/tutorValidation/'
+        const url = ('/api/tutor/tutorValidation/')
         try {
             // console.log(username, password)
             const response = await fetch(url, {
@@ -24,15 +24,15 @@ const LoginForm = () => {
                   'Content-Type': 'application/json',
                 },
             });
-            console.log(response)
             const data = await response.json();
+            console.log(data.username)
             // console.log(username)
           if (response.ok) {
             console.log('Login successful:', data);
+            
             // Handle login success (e.g., store the token, redirect, etc.)
           } else {
-            setError('data.username');
-            console.log(data)
+            setError(data.message);
           }
         } catch (error) {
           setError(error.message);

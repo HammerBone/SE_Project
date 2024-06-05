@@ -5,6 +5,7 @@ import Register from './pages/Register/Register'
 import Tutor from './pages/Tutor/Tutor'
 import Navbar from './components/Navbar/Navbar'
 import Login from './pages/Login/Login'
+import Profile from './pages/Profile/Profile'
 function App() {
   return (
     <div className="App">
@@ -17,6 +18,7 @@ function App() {
             {/* <Route path="/About" element={<About />}/> */}
             <Route path='/register' element={<Register />}/>
             <Route path='/login' element= {<Login />}/>
+            <Route path='/profile' element= {<Profile />}/>
           </Routes>
         </div>
       </BrowserRouter>

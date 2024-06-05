@@ -1,6 +1,7 @@
 const { default: mongoose } = require('mongoose')
 const Tutor = require('../models/tutorModel')
 // const jwt = require("jsonwebtoken")
+const bcrypt = require('bcrypt')
 // get user Tutor
 const getAllTutor = async (req, res) => {
     try {
@@ -58,24 +59,19 @@ const createTutor = async (req, res) => {
 //validating tutor login
 const tutorValidation = async (req,res) =>{
   const { username, password } = req.body;
-  res.status(200).json({message : 'Hellow'})
-
   try {
     // Find the user by their username
     const user = await Tutor.findOne({ tutorEmail: username });
-    console.log("test")
     if (user) {
       // Compare the provided password with the hashed password in the database
-      const isMatch = await bcrypt.compare(password, user.password);
+      const hash = await bcrypt.hash(user.tutorPassword,0)
+      const isMatch = await bcrypt.compare(password, hash);
+      console.log(user, isMatch, password)
       
-      // const jwtToken = jwt.sign({ userId: user._id }, 'asdaskkfnekn', { expiresIn: '1h' });
-      // res.send({ jwtToken });
-
       if (isMatch) {
         // Authentication successful
-        console.log("Masuk")
         res.json({ message: 'Login successful'});
-        res.redirect('/home')
+        // res.redirect('/')
       } else {
         // Authentication failed
         res.status(401).json({ message: 'Invalid username or password' });
