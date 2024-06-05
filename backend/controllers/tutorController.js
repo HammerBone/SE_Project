@@ -55,7 +55,33 @@ const createTutor = async (req, res) => {
     }
 }
 
+const filterTutor = async (req, res) => {
+    try {
+        let field = req.query.field || "All"
+
+        const TutorField = require('../models/tutorFieldModel')
+        const tutorFieldData = await TutorField.find({}, {  tutorFieldName: 1, _id: 0 })
+
+        const tutorFieldName = tutorFieldData.map( (res) => res.tutorFieldName)
+
+
+        field === "All" 
+            ? (field = [...tutorFieldName]) 
+            : (field = req.query.field.split(","))
+
+        const filteredTutorData = await Tutor.find({})
+            .where("tutorField")
+            .in([...field])
+
+        res.status(200).json(filteredTutorData)
+    } 
+    catch (error) {
+        res.status(400).json({ error: error.message })
+    }
+}
+
 module.exports = {
     getAllTutor,
-    createTutor
+    createTutor,
+    filterTutor
 }

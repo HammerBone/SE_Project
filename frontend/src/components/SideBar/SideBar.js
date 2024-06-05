@@ -1,9 +1,13 @@
+import Field from './Field/Field'
+import Rating from './Rating/Rating'
 import './SideBar.css'
 
-const SideBar = () => {
+const SideBar = ({ handleChange }) => {
     return (
         <div className="sidebar-container">
-            tes
+            <Field handleChange={handleChange}/>
+            <br /><br /><br />
+            <Rating />
         </div>
     )
 }

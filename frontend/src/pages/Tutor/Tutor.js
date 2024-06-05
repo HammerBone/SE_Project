@@ -5,31 +5,47 @@ import SideBar from '../../components/SideBar/SideBar'
 import TutorListCard from '../../components/TutorListCard/TutorListCard'
 
 const Tutor = () => {
-    const [tutor, setTutor] = useState([])
+    const base_url = '/api/tutor/filterTutor'
+
+    const [tutorData, setTutorData] = useState([])
+    const [selectedField, setSelectedField] = useState([])
 
     useEffect(() => {
         const fetchTutor = async () => {
-            const response = await fetch('/api/tutor/getAllTutor/')
+            const url = `${base_url}?field=${selectedField.toString()}`
+            const response = await fetch(url)
             const json = await response.json()
 
             if(response.ok) {
-                setTutor(json)
+                setTutorData(json)
             }
         }
-
         fetchTutor()
-    }, [])
+    }, [selectedField])
+
+    //Product Filter
+    const handleChange = (e) => {
+        if(e.target.checked) {
+            const state = [...selectedField, e.target.value]
+            console.log(state)
+            setSelectedField(state)  
+        }
+        else {
+            const state = selectedField.filter((val) => val !== e.target.value)
+            setSelectedField(state)
+        }
+    }
 
     return (
         <div className="tutor-page">
-            <SideBar/>
+            <SideBar handleChange={handleChange}/>
             <div className="tutor-list-container">
                 <div className="tutor-card-container">
-                    {tutor && tutor.map((tutor) => (
+                    {tutorData && tutorData.map((result) => (
                         <TutorListCard 
-                            key={tutor._id} 
-                            tutorFirstName={tutor.tutorFirstName} 
-                            tutorField={tutor.tutorField}
+                            key={result._id} 
+                            tutorFirstName={result.tutorFirstName} 
+                            tutorField={result.tutorField}
                         />
                     ))}
                 </div>

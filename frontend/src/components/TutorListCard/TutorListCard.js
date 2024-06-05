@@ -12,6 +12,9 @@ const TutorListCard = (props) => {
             </div>
             <img src="" alt="" />
             <div className="bottom-part-container">
+                <div className="review-details-container">
+                    
+                </div>
                 <div className="rating-price-container">
                     <h4>Review</h4>
                     <h4>{props.tutorPrice}</h4>

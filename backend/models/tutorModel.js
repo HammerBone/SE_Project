@@ -23,6 +23,10 @@ const tutorSchema = new Schema({
         type:String,
         required: false
     },
+    tutorSubField: {
+        type:String,
+        required: false
+    },
     tutorPrice: {
         type: Number,
         required: false

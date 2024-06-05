@@ -1,5 +1,8 @@
 .sidebar-container {
     width: 18.75%;
-    height: 83.3%;
-    background-color: cadetblue;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 2rem;
 }
