@@ -1,0 +1,7 @@
+.complete-profile-tutor-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #173684;
+    height: 100vh;
+}

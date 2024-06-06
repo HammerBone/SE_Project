@@ -5,6 +5,7 @@ const mongoose = require('mongoose')
 
 const templateRoutes = require('./routes/template')
 const tutorRoutes = require('./routes/tutorRoutes')
+const tutorFieldRoutes = require('./routes/tutorFieldRoutes')
 
 //express app
 const app = express()
@@ -20,6 +21,7 @@ app.use((req, res, next) => {
 // routes
 app.use('/api/template', templateRoutes)
 app.use('/api/tutor', tutorRoutes)
+app.use('/api/tutorField', tutorFieldRoutes)
 
 // db connection
 mongoose.connect(process.env.MONG_URI)

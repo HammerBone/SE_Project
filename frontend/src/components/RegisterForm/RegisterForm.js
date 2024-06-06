@@ -32,7 +32,6 @@ const RegisterForm = () => {
             }
             if (response.ok) {
                 setError(null)
-                console.log('User Tutor Created', json)
             }
         }
         catch (error){
@@ -42,7 +41,7 @@ const RegisterForm = () => {
     }
 
     return (
-        <div className="form-container">
+        <div className="register-form-container">
             <form className="register-form" onSubmit={handleSubmit}>
                 <h1>Enter Your Information</h1>
 
