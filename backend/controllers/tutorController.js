@@ -1,5 +1,6 @@
 const { default: mongoose } = require('mongoose')
 const Tutor = require('../models/tutorModel')
+const bcrypt = require('bcrypt')
 
 // get user Tutor
 const getAllTutor = async (req, res) => {
@@ -55,6 +56,36 @@ const createTutor = async (req, res) => {
     }
 }
 
+//validating tutor login
+const tutorValidation = async (req,res) =>{
+  const { username, password } = req.body;
+  try {
+    // Find the user by their username
+    const user = await Tutor.findOne({ tutorEmail: username });
+    if (user) {
+      // Compare the provided password with the hashed password in the database
+      const hash = await bcrypt.hash(user.tutorPassword,0)
+      const isMatch = await bcrypt.compare(password, hash);
+      console.log(user, isMatch, password)
+      
+      if (isMatch) {
+        // Authentication successful
+        res.json({ message: 'Login successful'});
+        // res.redirect('/')
+      } else {
+        // Authentication failed
+        res.status(401).json({ message: 'Invalid username or password' });
+      }
+    } else {
+      // User not found
+      res.status(401).json({ message: 'Invalid username or password' });
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'An error occurred during the login process' });
+  }
+}
+
 const filterTutor = async (req, res) => {
     try {
         let field = req.query.field || "All"
@@ -83,5 +114,6 @@ const filterTutor = async (req, res) => {
 module.exports = {
     getAllTutor,
     createTutor,
-    filterTutor
+    filterTutor,
+    tutorValidation
 }
