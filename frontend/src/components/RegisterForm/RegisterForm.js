@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useSignUp } from '../../hooks/useSignup'
 
 import './RegisterForm.css'
 import SubmitButton from '../Button/Button'
@@ -8,36 +9,16 @@ const RegisterForm = () => {
     const [lastName, setLastName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [error, setError] = useState(null);
+
+    const { signUp, isLoading, error } = useSignUp();
+
+    // const [error, setError] = useState(null);
 
     const handleSubmit = async (e) => {
         e.preventDefault()
 
-        const register = {firstName, lastName, email, password}
-        const url = '/api/tutor/createTutor/';
-
-        try {
-            const response = await fetch(url, {
-                method:'POST',
-                body: JSON.stringify(register),
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            });
-
-            const json = await response.json()
-
-            if (!response.ok) {
-                setError(json.error)
-            }
-            if (response.ok) {
-                setError(null)
-            }
-        }
-        catch (error){
-            console.log(error.message)
-        }
-        
+        const registerData = {firstName, lastName, email, password}
+        await signUp(registerData)
     }
 
     return (
@@ -88,7 +69,7 @@ const RegisterForm = () => {
                 </div>
 
                 <div className='submit-button-container'>
-                    <SubmitButton type="sign-up" text="Sign Up" />
+                    <SubmitButton disabled={isLoading} type="sign-up" text="Sign Up" />
                 </div>
                 {error && <div>{error}</div>}
             </form>

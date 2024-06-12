@@ -5,6 +5,9 @@ const Schema = mongoose.Schema
 const tutorFieldSchema = new Schema({
     tutorFieldName: {
         type: String
+    },
+    tutorSubFieldName : {
+        type: Array
     }
 })
 

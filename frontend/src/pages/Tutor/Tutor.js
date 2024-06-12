@@ -42,10 +42,11 @@ const Tutor = () => {
             <div className="tutor-list-container">
                 <div className="tutor-card-container">
                     {tutorData && tutorData.map((result) => (
-                        <TutorListCard 
+                        <TutorListCard
                             key={result._id} 
                             tutorFirstName={result.tutorFirstName} 
                             tutorField={result.tutorField}
+                            profilePicture={result.profilePicture}
                         />
                     ))}
                 </div>

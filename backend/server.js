@@ -22,6 +22,7 @@ app.use((req, res, next) => {
 app.use('/api/template', templateRoutes)
 app.use('/api/tutor', tutorRoutes)
 app.use('/api/tutorField', tutorFieldRoutes)
+app.use('/api/tutor/getTutorProfilePic', express.static(__dirname + '/uploads'))
 
 // db connection
 mongoose.connect(process.env.MONG_URI)

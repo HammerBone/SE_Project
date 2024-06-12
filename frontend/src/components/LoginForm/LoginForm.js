@@ -1,42 +1,22 @@
-import { useState } from 'react'
-import './LoginForm.css'
-import SubmitButton from '../Button/Button'
+import { useState } from 'react';
+import { useLogin } from '../../hooks/useLogin';
+
+import SubmitButton from '../Button/Button';
+import './LoginForm.css';
 
 const LoginForm = () => {
 
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    const [error, setError] = useState('');
+
+    const { login, isLoading, error } = useLogin();
 
     const handleLogin = async (e) => {
         e.preventDefault();  
-        setError('');
         
-        const login = {username, password}
-        
-        const url = ('/api/tutor/tutorValidation/')
-        try {
-            // console.log(username, password)
-            const response = await fetch(url, {
-              method: 'POST',
-              body: JSON.stringify(login),
-              headers: {
-                  'Content-Type': 'application/json',
-                },
-            });
-            const data = await response.json();
-            console.log(data.username)
-            // console.log(username)
-          if (response.ok) {
-            console.log('Login successful:', data);
-            
-            // Handle login success (e.g., store the token, redirect, etc.)
-          } else {
-            setError(data.message);
-          }
-        } catch (error) {
-          setError(error.message);
-        }
+        const loginData = {username, password}
+
+        await login(loginData);
       };
     return (
         <div className="Lform-container">
@@ -67,7 +47,7 @@ const LoginForm = () => {
                 </div>
 
                 <div className='submit-button-container'>
-                    <SubmitButton type="sign-up" text="Sign Up" />
+                    <SubmitButton disabled={isLoading} type="sign-up" text="Sign Up" />
                 </div>
                 {error && <div>{error}</div>}
             </form>

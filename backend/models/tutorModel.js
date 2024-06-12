@@ -5,19 +5,19 @@ const Schema = mongoose.Schema
 const tutorSchema = new Schema({
     tutorFirstName: {
         type: String,
-        required: true
+        required: false
     },
     tutorLastName: {
         type: String,
-        required: true
+        required: false
     },
     tutorEmail: {
         type: String,
-        required: true
+        required: false
     },
     tutorPassword: {
         type: String,
-        required: true
+        required: false
     },
     tutorField: {
         type:String,
@@ -25,6 +25,14 @@ const tutorSchema = new Schema({
     },
     tutorSubField: {
         type:String,
+        required: false
+    },
+    profilePicture: {
+        type: String,
+        required: false
+    },
+    tutorDescription: {
+        type: String,
         required: false
     },
     tutorPrice: {
