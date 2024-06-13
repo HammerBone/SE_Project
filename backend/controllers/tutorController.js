@@ -25,9 +25,7 @@ const createTutor = async (req, res) => {
         firstName,
         lastName,
         email,
-        password,
-        field,
-        price
+        password
     } = req.body
 
     try {
@@ -35,25 +33,19 @@ const createTutor = async (req, res) => {
             tutorFirstName,
             tutorLastName,
             tutorEmail,
-            tutorPassword,
-            tutorField,
-            tutorPrice
+            tutorPassword
         ] = [
             firstName,
             lastName,
             email,
-            password,
-            field,
-            price
+            password
         ]
 
         const tutor = await Tutor.create({
             tutorFirstName,
             tutorLastName,
             tutorEmail,
-            tutorPassword,
-            tutorField,
-            tutorPrice
+            tutorPassword
         })
 
         const token = generateToken(tutor._id)
@@ -79,23 +71,25 @@ const insertTutorProfilePicture = (req, res) => {
 }
 
 const createTutorProfile = async (req, res) => {
+    
     try {
         const {
             tutorField, 
             tutorSubField, 
             profilePicture, 
             tutorDescription, 
-            tutorPrice
+            tutorPrice,
+            tutorEmail
         } = req.body;
-    
-        const tutorProfile = await Tutor.create({
+
+        const tutorProfile = await Tutor.updateOne({ "tutorEmail" : tutorEmail }, {
             tutorField, 
             tutorSubField, 
             profilePicture, 
             tutorDescription, 
             tutorPrice
         });
-    
+        
         res.status(200).json(tutorProfile);
     } catch (error) {
         res.status(400).json(error.message)
@@ -107,8 +101,10 @@ const createTutorProfile = async (req, res) => {
 const tutorValidation = async (req,res) =>{
   const { username, password } = req.body;
   try {
+    console.log(req.body)
     // Find the user by their username
     const user = await Tutor.findOne({ tutorEmail: username });
+    console.log(user)
     if (user) {
       // Compare the provided password with the hashed password in the database
       const hash = await bcrypt.hash(user.tutorPassword,0)
@@ -118,7 +114,7 @@ const tutorValidation = async (req,res) =>{
         // Authentication successful
         const token = generateToken(user._id);
 
-        res.status(200).json({ username, token, message: 'Login successful' });
+        res.status(200).json({ tutorEmail: username, token, message: 'Login successful' });
       } 
       else {
         // Authentication failed
@@ -161,12 +157,32 @@ const filterTutor = async (req, res) => {
 
 const getTutorByEmail = async (req, res) => {
     try {
-        const { username }  = req.body;
-
-        const TutorData = await Tutor.findOne({ tutorEmail: username }, { tutorFirstName: 1, tutorLastName: 1, _id: 0 });
+        const { tutorEmail }  = req.body;
+        console.log(req.body)
+        console.log(tutorEmail)
+        const TutorData = await Tutor.findOne({ tutorEmail: tutorEmail }, {});
+        // console.log(TutorData)
 
         res.status(200).json(TutorData);
     } 
+    catch (error) {
+        res.status(400).json({ error: error.message })
+    }
+}
+
+const deleteTutorByEmail = async (req, res) => {
+    try {
+        const { tutorEmail } = req.body;
+
+        const TutorData = await Tutor.findOneAndDelete({ tutorEmail: tutorEmail });
+
+        if(!TutorData){
+            res.status(200).json("Data not exist!");
+        }
+        else {
+            res.status(200).json("Tutor Deleted!");
+        }      
+    }
     catch (error) {
         res.status(400).json({ error: error.message })
     }
@@ -179,5 +195,6 @@ module.exports = {
     tutorValidation,
     insertTutorProfilePicture,
     createTutorProfile,
-    getTutorByEmail
+    getTutorByEmail,
+    deleteTutorByEmail
 }

@@ -1,6 +1,9 @@
 .tutor-list-card {
     width: 100%;
-    height: 35vh;
+    height: 50vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     background-color: white;
     border-radius: 10px;
 }
@@ -8,4 +11,14 @@
 .top-part-container {
     display: flex;
     justify-content: space-between;
+}
+
+.tutor-list-card-img-container {
+    width: 100%;
+    height: 25vh;
+}
+
+.tutor-list-card-img-container img {
+    width: 100%;
+    height: 100%;
 }

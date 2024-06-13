@@ -10,7 +10,9 @@ const TutorListCard = (props) => {
                 </div>
                 <p>logo</p>
             </div>
-            <img src={"http://localhost:4000/api/tutor/getTutorProfilePic/" + props.profilePicture} alt="" />
+            <div className="tutor-list-card-img-container">
+                <img src={"http://localhost:4000/api/tutor/getTutorProfilePic/" + props.profilePicture} alt="" />
+            </div>
             <div className="bottom-part-container">
                 <div className="review-details-container">
                     <h4>Review</h4>

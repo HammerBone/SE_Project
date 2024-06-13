@@ -65,7 +65,15 @@ form.register-form h1 {
     flex-direction: column;
 }
 
+.role-choose {
+    width: 100%;
+    margin-top: 2rem;
+    padding-left: 5.5rem;
+}
+
 .submit-button-container {
+    display: flex;
+    justify-content: flex-end;
     width: 90%;
 }
 

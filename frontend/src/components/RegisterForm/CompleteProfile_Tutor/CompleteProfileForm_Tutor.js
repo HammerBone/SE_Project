@@ -62,7 +62,7 @@ const CompleteProfileForm_Tutor = () => {
         field.map((res) => setSubField(res.tutorSubFieldName) )
     }, [tutorField])
 
-    const tutorProfileData = { tutorField, tutorSubField, profilePicture, tutorDescription, tutorPrice }
+    const tutorProfileData = { tutorField, tutorSubField, profilePicture, tutorDescription, tutorPrice, tutorEmail: user.tutorEmail }
     const handleSubmit = async (e) => {
         try {
             const response = await fetch(createTutorProfileUrl, {
@@ -100,7 +100,7 @@ const CompleteProfileForm_Tutor = () => {
     
     return (
         <div className="complete-profile-tutor-form-container">
-            <form className="complete-profile-tutor-form">
+            <form className="complete-profile-tutor-form" onSubmit={handleSubmit}>
                 <h1>Complete Your Profile</h1>
 
                 <div className="complete-profile-tutor-info-container">

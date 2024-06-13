@@ -1,11 +1,17 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useAuthContext } from "./useAuthContext";
 
 export const useLogin = () => {
-    const [error, setError] = useState(null)
-    const [isLoading, setIsLoading] = useState(null)
+    const [error, setError] = useState(null);
+    const [isLoading, setIsLoading] = useState(null);
+    const [redirect, setRedirect] = useState(null);
     const { dispatch } = useAuthContext();
 
+    useEffect(() => {
+        if(isLoading == false && !error)
+            setRedirect(true);
+    })
+    
     const login = async (loginData) => {
         setIsLoading(true);
         setError(null)
@@ -38,6 +44,7 @@ export const useLogin = () => {
             console.log(error.message)
         }
     }
+    
 
-    return { login, isLoading, error }
+    return { login, isLoading, redirect, error }
 }
