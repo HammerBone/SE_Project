@@ -1,6 +1,13 @@
+import { useNavigate, Link } from 'react-router-dom'
 import './TutorListCard.css'
 
 const TutorListCard = (props) => {
+    const navigate = useNavigate();
+
+    const handleBook = () => {
+        navigate('/payment')
+    }
+
     return (
         <div className="tutor-list-card">
             <div className="top-part-container">
@@ -8,19 +15,15 @@ const TutorListCard = (props) => {
                     <h4>{props.tutorFirstName}</h4>
                     <h4>{props.tutorField}</h4>
                 </div>
-                <p>logo</p>
             </div>
             <div className="tutor-list-card-img-container">
                 <img src={"http://localhost:4000/api/tutor/getTutorProfilePic/" + props.profilePicture} alt="" />
             </div>
             <div className="bottom-part-container">
-                <div className="review-details-container">
-                    <h4>Review</h4>
-                </div>
                 <div className="rating-price-container">
-                    <h4>{props.tutorPrice}</h4>
+                    <h4>{props.tutorPrice}$ /day</h4>
                 </div>
-                {/* <button></button> */}
+                <Link to={'/tutor/' + props.tutorId}><button>Book</button></Link>
             </div>
         </div>
     )

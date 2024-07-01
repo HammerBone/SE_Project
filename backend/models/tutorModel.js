@@ -31,6 +31,10 @@ const tutorSchema = new Schema({
         type: String,
         required: false
     },
+    educationBackground: {
+        type: String,
+        required: false
+    },
     tutorDescription: {
         type: String,
         required: false
@@ -38,6 +42,19 @@ const tutorSchema = new Schema({
     tutorPrice: {
         type: Number,
         required: false
+    },
+    tutorRating: [
+        {
+            rating: Number,
+            review: String,
+            ratedBy: String,
+            studentName: String,
+            date: Date
+        }
+    ],
+    tutorTotalRating: {
+        type: Number,
+        default: 0
     }
 }, { timestamps: true })
 

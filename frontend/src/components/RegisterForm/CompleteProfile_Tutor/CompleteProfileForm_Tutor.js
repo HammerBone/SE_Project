@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
-import { useAuthContext } from '../../.././hooks/useAuthContext';
 import './CompleteProfileForm_Tutor.css'
 import SubmitButton from '../../Button/Button'
+import { Navigate, useNavigate } from 'react-router-dom';
 
 const CompleteProfileForm_Tutor = () => {
     const [fieldData, setFieldData] = useState([]);
@@ -14,6 +14,7 @@ const CompleteProfileForm_Tutor = () => {
     const [tutorPrice, setTutorPrice] = useState('')
 
     const [hidden, setHidden] = useState(false)
+    const [Redirect, setRedirect] = useState(null);
 
     const getTutorByEmailUrl = 'api/tutor/getTutorByEmail'
     const tutorFieldUrl = '/api/tutorField/getAllTutorField';
@@ -62,8 +63,9 @@ const CompleteProfileForm_Tutor = () => {
         field.map((res) => setSubField(res.tutorSubFieldName) )
     }, [tutorField])
 
-    const tutorProfileData = { tutorField, tutorSubField, profilePicture, tutorDescription, tutorPrice, tutorEmail: user.tutorEmail }
+    const tutorProfileData = { tutorField, tutorSubField, profilePicture, educationBackground, tutorDescription, tutorPrice, tutorEmail: user.tutorEmail }
     const handleSubmit = async (e) => {
+        e.preventDefault()
         try {
             const response = await fetch(createTutorProfileUrl, {
                 method: 'POST',
@@ -72,8 +74,8 @@ const CompleteProfileForm_Tutor = () => {
                     'Content-Type': 'application/json'
                 }
             });
+            setRedirect(true)
             const json = await response.json()
-
             
         } catch (error) {
             
@@ -96,6 +98,13 @@ const CompleteProfileForm_Tutor = () => {
             setProfilePicture(json);
             setHidden(true)
         })
+    }
+
+    const navigate = useNavigate();
+    const handleRedirect = () => {"tes"}
+      
+    if (Redirect) {
+        navigate('/profile');
     }
     
     return (
@@ -157,8 +166,8 @@ const CompleteProfileForm_Tutor = () => {
                         onChange={(e) => setTutorPrice(e.target.value)}/>
                     </section>
                 </div>
-                <div className="cpt-btn-container">
-                    <SubmitButton type="sign-up" text="Complete Your Profile"/> 
+                <div className="cpt-btn-container" >
+                    <SubmitButton type="sign-up" text="Complete Your Profile" onClick={handleRedirect}/> 
                 </div>   
             </form>
         </div>

@@ -1,0 +1,91 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+
+.Summary-wrapper{
+    background-color: white;
+    height: 100%;
+    border-radius: 30px;
+    box-sizing: border-box;
+}
+
+.isi-wrapper img{
+    width: 6vw;
+    height: 6vw;
+    border-radius: 15px;
+}
+
+.isi-wrapper .profile-details{
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    /* padding-right: 20%; */
+    padding: 2vw 0 1vw 0;
+    gap: 15px;
+}
+
+.isi-wrapper .profile-details .namrat{
+    display: block;
+    font-size: 30px;
+}
+
+.isi-wrapper .profile-details .namrat .text-detail{
+    align-items: center;
+    display: flex;
+    width: 100%;
+    font-size: 18px;
+}
+
+hr{
+    margin: 1vw;
+}
+
+.subTotal{
+    display: flex;
+    justify-content: space-between;
+    font-size: 1vw;
+    padding:1vw 15px 0 15px;
+}
+
+.subTotal h5{
+    color: grey;
+}
+
+.procode{
+    margin-left: 1vw;
+    width: 20vw;
+    height: 1.5vw;
+    padding-top: 0.75vw;
+    text-align: left;
+    align-items: center;
+    margin-top: 1vw;
+    background-color: #F6F7F9;
+    border-radius: 40px;
+}
+
+.procode .promo{
+    border: none;
+    background-color: transparent;
+    font-size: 20px;
+    padding-right: 15px;
+}
+
+.procode input{
+    width: 13vw;
+    padding-left: 1vw;
+}
+
+input:focus{
+    outline: none;
+}
+
+
+.totalPrice{
+    padding: 1vw;
+    display: flex;
+    align-items: center;
+    font-size: 40px;
+    justify-content: space-between;
+
+}

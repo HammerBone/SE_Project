@@ -1,0 +1,48 @@
+.review-tutor-container {
+    height: 88vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.review-tutor-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 50vw;
+    height: 70vh;
+    background-color: white;
+    border-radius: 15px;
+}
+
+.rating-container {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    border: 1px solid black;
+    height: 30vh;
+}
+
+.rating-container textarea {
+    padding: 0 0 0 0;
+    width: 35%;
+    height: 50%;
+    resize: none;
+}
+
+.rating-number {
+    display: flex;
+    justify-content: center;
+}
+
+.rating-checkbox-container {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.rating-checkbox-container input[type="radio"] {
+    width: 20px;
+    height: 20px;
+    border-radius: 0;
+    background-color: aqua;
+}

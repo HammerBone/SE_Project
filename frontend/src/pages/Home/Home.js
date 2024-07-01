@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom'
+
 import './Home.css'
 
 import picture from '../../assets/Picture/home-page-picture-cropped.jpg' 
@@ -16,8 +18,8 @@ const Home = () => {
                     <p>We connect you with top-tiers tutors</p>
 
                     <div className="home-title-button-container">
-                        <button>Get Started</button>
-                        <button>Explore</button>
+                        <Link to='/register'><button className='home-btn-1'>Get Started</button></Link>
+                        <Link to='/register'><button className='home-btn-2'>Explore</button></Link>
                     </div>
                 </div>
             </div> 

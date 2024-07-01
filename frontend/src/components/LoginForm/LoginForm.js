@@ -1,9 +1,12 @@
 import { useState } from 'react';
 import { useLogin } from '../../hooks/useLogin';
+import { Navigate } from 'react-router-dom';
 
 import SubmitButton from '../Button/Button';
+import Switch from '../Switch/Switch';
 import './LoginForm.css';
-import { Navigate } from 'react-router-dom';
+import { useStudentLogin } from '../../hooks/useStudentLogin';
+
 
 const LoginForm = () => {
 
@@ -11,17 +14,31 @@ const LoginForm = () => {
     const [password, setPassword] = useState('');
 
     const { login, isLoading, redirect, error } = useLogin();
+    const { loginStudent, isLoadingStudent, redirectStudent, errorStudent } = useStudentLogin();
+
+    const [isTutor, setIsTutor] = useState(true);
 
     const handleLogin = async (e) => {
         e.preventDefault();  
         
         const loginData = {username, password}
 
-        await login(loginData);
+        if (isTutor)
+            await login(loginData);
+        if (!isTutor)
+            await loginStudent(loginData);
     };
+    
+    
+    const handleToggle = () => {
+        setIsTutor(!isTutor);
+    }
 
-    if (redirect) {
+    if (redirectStudent && !isTutor) {
         return <Navigate to={'/tutor'}/>
+    }
+    if (redirect && isTutor) {
+        return <Navigate to={'/profile'} />
     }
 
     return (
@@ -50,10 +67,13 @@ const LoginForm = () => {
                             />
                         </div>   
                     </div>
+                    <div className="role-choose">
+                        <Switch isTutor={handleToggle} />
+                    </div>
                 </div>
-
+               
                 <div className='submit-button-container'>
-                    <SubmitButton disabled={isLoading} type="sign-up" text="Sign Up" />
+                    <SubmitButton disabled={isLoading} type="sign-up" text="Log In" />
                 </div>
                 {error && <div>{error}</div>}
             </form>

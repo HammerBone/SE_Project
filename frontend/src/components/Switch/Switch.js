@@ -13,12 +13,11 @@ const Switch = ({ isTutor }) => {
         <div className="switch">
             <button type='button' className={ `toggle-btn ${ toggled ? 'toggled' : "" }` } onClick={handleSwitch}>
                 <div className="thumb">{ toggled ? "I am a student" : "I am a tutor" }</div>
-                <p>{ toggled ?  "I am a tutor" : "I am a student" }</p>
+                <p>I am a Student</p>
+                <p>I am a Tutor</p>
             </button>
-        </div>
-        
-    );
-    
+        </div>       
+    );   
 };
 
 export default Switch;

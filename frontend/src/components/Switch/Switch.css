@@ -34,13 +34,14 @@
     left: 1rem;
     top: 50%;
     transform: translateY(-50%);
+    transition: left 1s ease;
 }
 
 .toggle-btn.toggled .thumb {
     left: calc(100% - 50%);
 }
 
-.toggle-btn p {
+.toggle-btn p:nth-child(2) {
     position: absolute;
     right: 1.5rem;
     top: 50%;
@@ -48,9 +49,28 @@
     color: white;
     font-size: 13px;
     font-weight: 600;
-    transition: left 0.1s ease;
+    transition: opacity 1s ease;
 }
 
-.toggle-btn.toggled p {
-    right: calc((100% - 40%));
+.toggle-btn.toggled p:nth-child(2) {
+    opacity: 0;
 }
+
+.toggle-btn.toggled p:nth-child(3){
+    position: absolute;
+    left: 1.5rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: white;
+    font-size: 13px;
+    font-weight: 600;
+    opacity: 100%;
+    transition: opacity 1s ease;
+    
+}
+
+.toggle-btn p:nth-child(3){
+    opacity: 0;
+}
+
+

@@ -14,7 +14,14 @@ const studentSchema  = new Schema({
     },
     studentPassword: {
         type: String
-    }
+    },
+    bookedTutor: [
+        {
+            tutorId: {
+                type: mongoose.Schema.Types.ObjectId
+            }
+        }
+    ]
 } ,{ timestamps: true });
 
 module.exports = mongoose.model("StudentModel", studentSchema);

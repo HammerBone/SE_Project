@@ -1,0 +1,21 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+
+.Payment-wrapper{
+    display: flex;
+    justify-content: center;
+    /* width: 100%; */
+    padding-top: 1vw;
+    padding-bottom: 5vw;
+    justify-content: space-around;
+    ;
+}
+
+.left-wrapper{
+    
+    display: block;
+    width: 50%;
+}
+

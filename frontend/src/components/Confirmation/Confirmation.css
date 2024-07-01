@@ -1,0 +1,59 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+
+.confirmation-wrapper{
+    width: 100%;
+    background-color: white;
+    border-radius: 15px;
+    margin-top: 1vw;
+}
+
+.form-wrapper .text-wrapper{
+    display: flex;
+    justify-content: left;
+    gap:1vw;
+    background-color: #F6F7F9;
+    width: 95%;
+    height: 3vw;
+    align-items: center;
+    margin-top: 1vw;
+    margin-left: 1vw;
+}
+
+.form-wrapper .text-wrapper label{
+    text-align: start;
+    font-size: 20px;
+}
+
+.form-wrapper .text-wrapper input{
+    width: 20px;
+    height: 20px;
+    margin-left: 15px;
+    border-color: #F6F7F9;
+}
+
+.form-wrapper button{
+    background-color:#3563E9;
+    color: white;
+    border: none;
+    width: 5.4vw;
+    height: 2vw;
+    font-size:18px;
+    margin:1vw 0 0 1vw;
+    border-radius: 15px;
+}
+
+.bawahan{
+    padding: 1vw;
+}
+
+.bawahan img{
+    width: 2vw;
+    padding-bottom: 15px;
+}
+
+.bawahan p{
+    color: grey;
+}

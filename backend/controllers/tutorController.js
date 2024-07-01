@@ -1,5 +1,6 @@
 const { default: mongoose } = require('mongoose');
 const Tutor = require('../models/tutorModel');
+const Student = require('../models/studentModel')
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const fs = require('fs');
@@ -50,7 +51,7 @@ const createTutor = async (req, res) => {
 
         const token = generateToken(tutor._id)
 
-        res.status(200).json({tutorEmail, token})
+        res.status(200).json({tutorEmail, userRole: 'tutor', token})
     }
     catch (error) {
         res.status(400).json({ error: error.message })
@@ -76,7 +77,8 @@ const createTutorProfile = async (req, res) => {
         const {
             tutorField, 
             tutorSubField, 
-            profilePicture, 
+            profilePicture,
+            educationBackground,
             tutorDescription, 
             tutorPrice,
             tutorEmail
@@ -86,6 +88,7 @@ const createTutorProfile = async (req, res) => {
             tutorField, 
             tutorSubField, 
             profilePicture, 
+            educationBackground,
             tutorDescription, 
             tutorPrice
         });
@@ -114,7 +117,7 @@ const tutorValidation = async (req,res) =>{
         // Authentication successful
         const token = generateToken(user._id);
 
-        res.status(200).json({ tutorEmail: username, token, message: 'Login successful' });
+        res.status(200).json({ tutorEmail: username, userRole: 'tutor', token, message: 'Login successful' });
       } 
       else {
         // Authentication failed
@@ -155,13 +158,20 @@ const filterTutor = async (req, res) => {
     }
 }
 
+const getTutorById = async (req, res) => {
+    const { id } = req.params;
+
+    const tutorData = await Tutor.findOne({ _id: id });
+
+    res.status(200).json(tutorData)
+}
+
 const getTutorByEmail = async (req, res) => {
     try {
+        
         const { tutorEmail }  = req.body;
-        console.log(req.body)
-        console.log(tutorEmail)
+
         const TutorData = await Tutor.findOne({ tutorEmail: tutorEmail }, {});
-        // console.log(TutorData)
 
         res.status(200).json(TutorData);
     } 
@@ -188,6 +198,74 @@ const deleteTutorByEmail = async (req, res) => {
     }
 }
 
+const rateTutor = async (req, res) => {
+    const { studentEmail, rating, review, tutorId } = req.body;
+
+    try {
+        const getTutorData = await Tutor.findById(tutorId);
+        const getStudentData = await Student.findOne({ studentEmail: studentEmail }, { _id: 0, studentFirstName: 1 })
+
+        const { studentFirstName } = getStudentData
+
+        let isRated = getTutorData.tutorRating.find((tutorId) => 
+            tutorId.ratedBy.toString() === studentEmail.toString()
+        );
+
+        if (isRated) {
+            return res.status(200).json({ message: "You already review" });
+        }
+        else {
+            const rateTutor = await Tutor.findByIdAndUpdate(tutorId, 
+                {
+                    $push: {
+                        tutorRating: {
+                            rating: rating,
+                            review: review,
+                            ratedBy: studentEmail,
+                            studentName: studentFirstName,
+                            date: new Date()
+                        }
+                    }
+                }, 
+                {
+                    new: true
+                } 
+            );
+        }
+        const getUpdatedTutorData = await Tutor.findById(tutorId);
+        const totalRating = getUpdatedTutorData.tutorRating.length;
+
+        let sumRating = getUpdatedTutorData.tutorRating
+            .map((item) => item.rating)
+            .reduce((prev, curr) => prev + curr, 0);
+        
+        let ratingValue = Math.round(sumRating / totalRating);
+
+        let updateTutorTotalRating = await Tutor.findByIdAndUpdate(tutorId, 
+            { 
+                tutorTotalRating: ratingValue,
+            }, 
+            { new: true }
+        )
+
+        res.status(200).json(updateTutorTotalRating)
+    } 
+    catch (error) {
+        res.status(400).json({ error: error.message })
+    }
+}
+
+const getReview = async (req, res) => {
+    const { id } = req.params;
+
+    let tutorRatingData = await Tutor.findById(id)
+    tutorRatingData = tutorRatingData.tutorRating?.map((res) => res)
+    // let studentEmail = tutorRatingData.tutorRating?.map((res) => res.ratedBy)
+    // let studentData  = await Student.find({ studentEmail: studentEmail }, { _id: 0, studentFirstName: 1, studentEmail: 1})
+    
+    res.status(200).json(tutorRatingData)
+}
+
 module.exports = {
     getAllTutor,
     createTutor,
@@ -195,6 +273,9 @@ module.exports = {
     tutorValidation,
     insertTutorProfilePicture,
     createTutorProfile,
+    getTutorById,
     getTutorByEmail,
-    deleteTutorByEmail
+    deleteTutorByEmail,
+    rateTutor,
+    getReview
 }

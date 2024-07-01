@@ -1,0 +1,58 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+
+.Billing-wrapper{
+    width: 100%;
+    height: 15vw;
+    background-color: white;
+    border-radius: 15px;
+}
+
+.text{
+    padding-top: 15px;
+    padding-left: 15px;
+}
+
+.text h3{
+    padding-left: 3px;
+    font-size: 1.4vw;
+    padding-bottom:10px;
+}
+
+.text .text-container{
+    font-size: 0.7vw;
+    display: flex;
+    color: grey;
+    justify-content: space-between;
+    padding-right: 15px;
+}
+
+
+.Billing-wrapper .y-container{
+    display: block;
+    padding-top: 35px;
+}
+
+.Billing-wrapper .y-container .x-container{
+    display: flex;
+}
+
+.Billing-wrapper .y-container .x-container .input-container{
+    font-size: 0.8vw;
+    text-align: start;  
+    display: block;  
+    padding-bottom: 1vw;
+    padding-left: 15px;
+}
+
+.Billing-wrapper .y-container .x-container .input-container input{
+    width: 90%;
+    height: 2vw;
+    margin-top: 15px;
+    border-radius: 15px;
+    border:none;
+    background-color: #F6F7F9;
+}
+

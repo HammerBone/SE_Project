@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 import Improf from "../../components/Image Profile/Improf"
 import picture from '../../assets/Picture/home-page-picture.jpg' 
 import './Profile.css'
+
 const Profile = ()=> {
     const loggedInUser = JSON.parse(localStorage.getItem('user'))
     const getTutorByEmailUrl = 'api/tutor/getTutorByEmail';
@@ -27,11 +28,16 @@ const Profile = ()=> {
         getLoggedInTutorData(); 
     }, []);
 
-    const date = (loggedInTutorData.createdAt).split("T")[0]
+    const date = (loggedInTutorData && (loggedInTutorData.createdAt).split("T")[0])
     return (
         <div className="profile">
-            <Improf img = {loggedInTutorData.profilePicture} pp = {picture} 
-            name = {loggedInTutorData.tutorFirstName + loggedInTutorData.tutorLastName} date = {date} />
+            <Improf img = {loggedInTutorData &&loggedInTutorData.profilePicture} pp = {picture} 
+            name = {loggedInTutorData && loggedInTutorData.tutorFirstName + loggedInTutorData.tutorLastName} date = {date} />
+
+            <div className="profile-info">
+                <h1>About Me</h1>
+                <p>{loggedInTutorData &&loggedInTutorData.tutorDescription}</p>
+            </div>
         </div>
     )
 }

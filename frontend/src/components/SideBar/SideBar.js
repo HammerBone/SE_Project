@@ -7,7 +7,6 @@ const SideBar = ({ handleChange }) => {
         <div className="sidebar-container">
             <Field handleChange={handleChange}/>
             <br /><br /><br />
-            <Rating />
         </div>
     )
 }
